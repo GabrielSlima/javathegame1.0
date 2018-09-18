@@ -10,13 +10,15 @@ class jogador
 }
 class partida
 {	
-	//for(int i = 0; )
-	String jogadores, perguntas, respostas;
+	
+	String  perguntas, respostas;
 	int vencedor;
 	void apresentar(int qnt)
 	{
-		int quantidade = qnt;
-		System.out.println(qnt + " eh a quantidade de jogadores!");
+		int qn = qnt;
+		int[] jogadores = new  int[qnt];
+		for(int i =1; i<=qnt; i++) jogadores[i-1] = i;
+		for(int i=0; i<jogadores.length;i++) System.out.println(jogadores[i] + " eh a quantidade de jogadores!");
 	}
 
 }
@@ -58,8 +60,8 @@ public class game
       players[i-1].nick = reader.next();
     }
 	System.out.println(players.getClass().getName());
-	//partida part = new partida();
-	//part.apresentar(players);
+	partida part = new partida();
+	part.apresentar(quantidade_jogadores);
 
   } //VOID 
 } //CLASS
