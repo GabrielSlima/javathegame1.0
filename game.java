@@ -8,7 +8,18 @@ class jogador
     return pontuacao;
   }
 }
+class partida
+{	
+	//for(int i = 0; )
+	String jogadores, perguntas, respostas;
+	int vencedor;
+	void apresentar(int qnt)
+	{
+		int quantidade = qnt;
+		System.out.println(qnt + " eh a quantidade de jogadores!");
+	}
 
+}
 public class game
 {
   public static void main (String args[])
@@ -24,13 +35,13 @@ public class game
       quantidade_jogadores = reader.nextInt();
 
       //SE A QUANTIDADE DE JOGADORES FOR DIFERENTE DE 0 E MENOR OU IGUAL A 4 SAIR DO LOOPING "INFINITO"
-      if(quantidade_jogadores != 0 && quantidade_jogadores <=4 ) break;
+      if(quantidade_jogadores != 0 && quantidade_jogadores <=4 && quantidade_jogadores >=2) break;
       
       //SE A QUANTIDADE DE JOGADORES FOR MAIOR QUE 4 CONTINUAR
       if(quantidade_jogadores > 4)System.out.println("A quantidade maxima de jogadores eh 4!");continue;
     }
 
-    //BAEADO NA QUANTIDADE DE JOGADORES IREMOS DECLARAR UMA LISTA DE OBJETOS 
+    //BASEADO NA QUANTIDADE DE JOGADORES IREMOS DECLARAR UMA LISTA DE OBJETOS 
     jogador[] players = new jogador[quantidade_jogadores]; 
 
     //PARA CADA ITEM DA LISTA TEREMOS UM NOVO OBJETO
@@ -46,6 +57,9 @@ public class game
       //PEDIREMOS UM NICK E ARMAZENAREMOS EM SEU INDEX QUE SEMPRE SERÁ i-1, SE i = 0 ENTAO O INDEX DO PRIMEIRO ITEM É 0 (1-1)
       players[i-1].nick = reader.next();
     }
+	System.out.println(players.getClass().getName());
+	//partida part = new partida();
+	//part.apresentar(players);
 
   } //VOID 
 } //CLASS
