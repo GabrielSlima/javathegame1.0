@@ -11,24 +11,17 @@ class jogador
 }
 class partida
 {
-    Scanner reader = new Scanner(System.in);
-    int quantidade_jogadores = 0;
-    void coletar_infos()
+    	Scanner reader = new Scanner(System.in);
+    	int quantidade_jogadores = 0;
+	int[] valores_perguntas  = {"1","2","3","4","5"};
+	//String[] Perguntas = {"Questao 1", "Questao 2"};
+	public partida(int valor)
+	{
+	 this.quantidade_jogadores = valor;
+		System.out.println(this.quantidade_jogadores);
+	}
+    void iniciar()
     {
-        //ENQUANTO FOR VERDADE 
-        while(true)
-        {
-            //PEDIR A QUANTIDADE DE JOGADORES
-            System.out.println("Qual a quantidade de jogadores ?");
-            quantidade_jogadores = reader.nextInt();
-
-            //SE A QUANTIDADE DE JOGADORES FOR DIFERENTE DE 0 E MENOR OU IGUAL A 4 SAIR DO LOOPING "INFINITO"
-            if(quantidade_jogadores != 0 && quantidade_jogadores <=4 ) break;
-      
-            //SE A QUANTIDADE DE JOGADORES FOR MAIOR QUE 4 CONTINUAR
-            if(quantidade_jogadores > 4)System.out.println("A quantidade maxima de jogadores eh 4!");continue;
-        }/* WHILE*/
-
         //BASEADO NA QUANTIDADE DE JOGADORES IREMOS DECLARAR UMA LISTA DE OBJETOS 
         jogador[] players = new jogador[quantidade_jogadores]; 
 
@@ -45,15 +38,37 @@ class partida
             //PEDIREMOS UM NICK E ARMAZENAREMOS EM SEU INDEX QUE SEMPRE SERÁ i-1, SE i = 0 ENTAO O INDEX DO PRIMEIRO ITEM É 0 (1-1)
             players[i-1].nick = reader.next();
         }/*FOR*/
-        for(int i = 0; i <players.length;i++)players[i].ver_pontuacao();
+        //for(int i = 0; i <players.length;i++)players[i].ver_pontuacao();
+	//Atribuindo valores para as variaveis 
+	for(int i = 0; i<valores_perguntas.length;i++)
+	{
+		if(valores_perguntas[i] == null) continue;
+		
+	}
     }/*VOID*/
+
 }  
 public class game
 {
   public static void main (String args[])
-  {
-    partida rodada = new partida();
-    rodada.coletar_infos(); 
-
+  {	Scanner leitor = new Scanner(System.in);
+	int quantidade_inicial = 0;
+	while(true)
+	{
+		System.out.println("Digite a quantiade de jogadores");
+		quantidade_inicial = leitor.nextInt();
+		if(quantidade_inicial != 1 && quantidade_inicial <=4)
+		{
+			partida rodada = new partida(quantidade_inicial);
+			rodada.iniciar();
+			break;
+		}
+		else
+		{
+			System.out.println("A quantidade de jogadores sao pelo menos 2 e no maximo 4");
+			continue;
+		}
+	}
+  	
   } //VOID 
 } //CLASS
