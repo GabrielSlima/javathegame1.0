@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 class jogador
 {
   String nick;
@@ -6,18 +7,20 @@ class jogador
   void ver_pontuacao()
   {
     //return nick;
-    System.out.println(nick);
+    System.out.println(nick + " - Pontos: " + pontuacao);
   }
 }
 class partida
 {
     	Scanner reader = new Scanner(System.in);
+        Random objeto = new Random();
     	int quantidade_jogadores = 0;
-	int[] valores_perguntas  = {"1","2","3","4","5"};
-	//String[] Perguntas = {"Questao 1", "Questao 2"};
+        int resposta_jogador = 0;
+	    String[] valores_perguntas  = {"1","2","3","4","5"};
+        int quantidade_perguntas_nulas = 0;
 	public partida(int valor)
 	{
-	 this.quantidade_jogadores = valor;
+	    this.quantidade_jogadores = valor;
 		System.out.println(this.quantidade_jogadores);
 	}
     void iniciar()
@@ -38,13 +41,105 @@ class partida
             //PEDIREMOS UM NICK E ARMAZENAREMOS EM SEU INDEX QUE SEMPRE SERÁ i-1, SE i = 0 ENTAO O INDEX DO PRIMEIRO ITEM É 0 (1-1)
             players[i-1].nick = reader.next();
         }/*FOR*/
-        //for(int i = 0; i <players.length;i++)players[i].ver_pontuacao();
-	//Atribuindo valores para as variaveis 
-	for(int i = 0; i<valores_perguntas.length;i++)
-	{
-		if(valores_perguntas[i] == null) continue;
+        
+        //ENQUANTO HOUVER PERGUNTAS
+        int i =0;
+        while(quantidade_perguntas_nulas!=5)
+        {
+            
+            //ENQUANTO O CONTADOR FOR MENOR QUE O VALOR QUE É REFERENCIA À QUANTIDADE DE OBJETOS JOGADORES 
+	        while(i < players.length)
+	        {
+                //SE TODAS AS PERGUNTAS FOREM NULAS SAIR DO WHILE ATUAL 
+	            if(quantidade_perguntas_nulas == 5)
+                {
+                    break;
+                    
+                }
+                
+                //VAIRAVEIS PARA GUARDAR O VALOR ALEATORIO DO OBJETO RANDOM 
+                int valor_aleatorio = 0;
+            
+                //APRESENTAÇÃO DO JOGADOR ATUAL                
+                System.out.println("Vez do " + players[i].nick + "!");
+                
+                //ENQUANTO A PERGUNTA FOR NULA, OU SEJA, ENQUANTO O VALOR ALEATORIO RESULTAR NUMA PERGUNTA JÁ ESCOLHIDA
+                while(true)
+                {
+                    //SORTEAR UM VALOR ENTRE O INTERVALO DE PERGUNTAS POSSIVEIS
+                    valor_aleatorio = objeto.nextInt(valores_perguntas.length);
+
+                    //ESCOLHER UMA PERGUNTA BASEADA NO VALOR ALEATORIO
+                    String pergunta = valores_perguntas[valor_aleatorio];
+
+                    //SE A PERGUNTA FOR NULLA, SIGNIFICA QUE JA FOI ESCOLHIDA
+                    if(pergunta == null)
+                    {
+                        
+                        //SE A QUANTIDADE DE VALORES NULOS FOR IGUAL AO TAMANHO DA LISTA DE PERGUNTAS SIGNIFICA QUE TODAS AS PERGUNTAS JA FORAM ESCOLHIDAS E NÃO HÁ MAIS NENHUMA DISPONIVEL
+                        if(quantidade_perguntas_nulas == 5) break;
+                        continue;
+                    }
+                    //SE A PERGUNTA NÃO FOR NULA, PARAR O LOOPING E IR PARA A PROXIMA INSTRUÇÃO
+                    else
+                    {
+                        break;
+                    }
+                }//While 
+
+                //A PERGUNTA ATUAL PASSA A SER NULA PORQUE ACABA DE TER SIDO ESCOLHIDA 
+                valores_perguntas[valor_aleatorio] = null;
+
+                //SOMANDO MAIS 1 À QUANTIDADE DE VALORES NULOS
+                quantidade_perguntas_nulas++;
+
+                //APRESENTAR A PERGUNTA
+                switch(valor_aleatorio)
+                    {
+                    
+                        case 1:
+                            System.out.println("Pergunta 1");
+                            //PEDIR UMA RESPOSTA
+                            resposta_jogador = reader.nextInt();
+                            //SE A RESPOSTA FOR IGUAL A CORRETA CONTAR PONTO
+                            if(resposta_jogador == 1) players[i].pontuacao +=1;
+                            //SE O JOGADOR ATUAL FOR O ULTIMO
+                            if(i+1 == players.length) i =0;
+                            break;
+                        case 2:
+                            System.out.println("Pergunta 2");
+                            resposta_jogador = reader.nextInt();
+                            if(resposta_jogador == 2) players[i].pontuacao +=1;
+                            if(i+1 == players.length) i =0;
+                            break;
+                        case 3:
+                            System.out.println("Pergunta 3");
+                            resposta_jogador = reader.nextInt();
+                            if(resposta_jogador == 3) players[i].pontuacao +=1;
+                            if(i+1 == players.length) i =0;
+                            break;
+                        case 4:
+                            System.out.println("Pergunta 4");
+                            resposta_jogador = reader.nextInt();
+                            if(resposta_jogador == 4) players[i].pontuacao +=1;
+                            if(i+1 == players.length) i =0;
+                            break;
+                        case 5:
+                            System.out.println("Pergunta 5");
+                            resposta_jogador = reader.nextInt();
+                            if(resposta_jogador == 5) players[i].pontuacao +=1;
+                            if(i+1 == players.length) i =0;
+                            break;
+                    }//SWITCH
+                       i++;        
+                }//FOR
+                
+            }//WHILE INFINITO
+
+            //APRESENTAÇÃO DA PONTUAÇÃO DE CADA JOGADOR
+            for(int a = 0; a <players.length;a++)players[a].ver_pontuacao();
 		
-	}
+	    
     }/*VOID*/
 
 }  
